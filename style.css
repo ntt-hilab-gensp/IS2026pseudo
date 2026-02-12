@@ -1,0 +1,126 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Hiragino Kaku Gothic ProN";
+}
+
+a {
+  text-decoration: none;
+}
+
+
+main{
+  text-align: left;
+  margin: 2em;
+}
+
+/*
+.style-1 {
+  text-align: left;
+  margin: 30px 0;
+  margin-left : 30px ;
+}
+*/
+audio { width: 150px; }
+
+
+table , td, th {
+	border: 1px solid;
+	border-collapse: collapse;
+}
+td, th {
+	padding: 0.4em;
+	width: auto;
+	height: auto;
+  text-align: center ;
+}
+th {
+  background-color: rgba(135,206,250,1);
+}
+
+
+header {
+  height:auto;
+  width: 100%;
+  background-color: rgba(135,206,250,1);
+  top: 0;
+  z-index: 10;
+  text-align: center;
+  padding: 1em;
+
+}
+
+.bottom{
+  margin-bottom: 2em;
+}
+
+footer img {
+  width: 125px;
+}
+
+footer p {
+/*   color: #b3aeb5; */
+  font-size: 12px;
+}
+
+footer {
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.sample-block {
+  margin-bottom: 60px;
+}
+
+.audio-row {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+.audio-card {
+  flex: 1;
+}
+
+h2, h3, h4 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 6px 0;
+  line-height: 1.4;
+}
+
+audio {
+  margin: 8px 0 20px 0;
+}
+
+.prompt-box {
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  margin: 20px 0;
+  max-height: 500px;   /* 長いのでスクロール */
+  overflow-y: auto;
+}
+
+.prompt-box pre {
+  white-space: pre-wrap;   /* 折り返す */
+  word-break: break-word;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.prompt-box code {
+  font-family: "Courier New", monospace;
+}
+  }
+
+
+}

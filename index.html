@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice impression-controllable zero-shot TTS</title>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+
+<header>
+
+
+	<h1>
+		<p>Learning Direction-Following TTS with Pseudo Performance Directions</p>
+	</h1>	
+
+	<h2>
+		<!-- <p>Kenichi Fujita, Shota Horiguchi, and Yusuke Ijima</p>
+		-->
+		<p>Anonymous submission to Interspeech 2026</p>
+	</h2>	
+	<h3>
+		<!-- <p>NTT Corporation, Japan</p>
+		-->
+	</h3>	
+
+
+</header>
+
+
+<main>
+
+
+
+
+
+
+<div id="audio" class="bottom">
+
+	<h2>Contents</h2>
+
+	<ul class="toc">
+  		<li>
+    		<a href="#samples">
+				Samples from Direction-Following TTS
+   			</a>
+  		</li>
+
+		<li class="jisage">
+    		<a href="#female">Speech samples (female)</a>
+  		</li>
+
+  		<li class="jisage">
+    		<a href="#llm_prompt_gen">LLM prompt for pseudo direction generation</a>
+  		</li>
+	  		<li class="jisage">
+    		<a href="#llm_prompt">LLM propmts for evaluation</a>
+  		</li>
+	</ul>
+
+	<h2>Notes</h2>
+	<ul>
+		<li>HiFi-GAN was used for all speech sample generation.</li>
+		<li>If you are having trouble listening to the audios, try refreshing the page.</li>
+	</ul>
+  	<h2 id="samples">Direction following zero-shot TTS </h2>
+	<ul>
+		<li>Altering style with directions</li>
+	</ul>
+
+  <!-- Sample 1 -->
+  <div class="sample-block">
+
+    <h3 id="female">Sample (Female, unseen)</h3>
+
+    <hr>
+    <p><b>Source</b> (Audio before being refined)</p>
+    <audio controls src="audios/refs/out_female/1.wav"></audio>
+
+	<p>
+    	<b>Direction</b>
+		: Please make sure the gratitude comes through by giving your voice a gentle and heartfelt tone.
+    </p>
+    <div class="audio-row">
+
+    	<div class="audio-card">
+        	<p><b>Recorded</b></p>
+        	<audio controls src="audios/out_female/orig/pred_instr00_1.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>Pseudo</b></p>
+        	<audio controls src="audios/out_female/pseudo/pred_instr00_1.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>Full</b></p>
+        	<audio controls src="audios/out_female/full/pred_instr00_1.wav"></audio>
+      	</div>
+    </div>
+    <hr>
+    <p><b>Source</b> (Audio before being refined)</p>
+    <audio controls src="audios/refs/out_female/10.wav"></audio>
+
+	<p>
+    	<b>Direction</b>
+		: Let’s speak in a composed, even tone to settle the other person.
+    </p>
+    <div class="audio-row">
+
+    	<div class="audio-card">
+        	<p><b>Recorded</b></p>
+        	<audio controls src="audios/out_female/orig/pred_instr05_10.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>Pseudo</b></p>
+        	<audio controls src="audios/out_female/pseudo/pred_instr05_10.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>Full</b></p>
+        	<audio controls src="audios/out_female/full/pred_instr05_10.wav"></audio>
+      	</div>
+    </div>
+    <hr>
+    <p><b>Source</b> (Audio before being refined)</p>
+    <audio controls src="audios/refs/out_female/11.wav"></audio>
+
+	<p>
+    	<b>Direction</b>
+		: Bring the energy to the forefront and use a bright, well-projected voice.
+    </p>
+    <div class="audio-row">
+
+    	<div class="audio-card">
+        	<p><b>Recorded</b></p>
+        	<audio controls src="audios/out_female/orig/pred_instr04_11.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>Pseudo</b></p>
+        	<audio controls src="audios/out_female/pseudo/pred_instr04_11.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>Full</b></p>
+        	<audio controls src="audios/out_female/full/pred_instr04_11.wav"></audio>
+      	</div>
+    </div>
+
+	<hr>
+    <p><b>Source</b> (Audio before being refined)</p>
+    <audio controls src="audios/refs/out_female/111.wav"></audio>
+
+	<p>
+    	<b>Direction</b>
+		: Give your voice more presence and make the statement more assertive.
+    </p>
+    <div class="audio-row">
+
+    	<div class="audio-card">
+        	<p><b>Recorded</b></p>
+        	<audio controls src="audios/out_female/orig/pred_instr30_111.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>Pseudo</b></p>
+        	<audio controls src="audios/out_female/pseudo/pred_instr30_111.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>Full</b></p>
+        	<audio controls src="audios/out_female/full/pred_instr30_111.wav"></audio>
+      	</div>
+    </div>
+
+  </div>
+</div>
+
+<h3 id="llm_prompt_gen">Prompt example for pseudo direction generation</h3>
+	<ul>
+		<li>Translated prompt for LLM-based pseudo direction generation.</li>
+	</ul>
+<div class="prompt-box">
+<pre><code>
+You are a professional voice director.
+
+Accurately read the Before/After impression scores and their differences below,
+and generate five direction instructions that reflect
+the change in performance and the underlying psychological intent.
+
+Internally perform the following analysis, but do NOT output the summary:
+
+- Summarize the overall impression of Before in one sentence.
+- Summarize the overall impression of After in one sentence.
+- Organize the psychological or intentional changes inferred from the differences.
+- Map vocal manipulations (pitch, intensity, clarity, tempo, intonation, etc.)
+  to the corresponding psychological intent.
+
+Do NOT output your reasoning process.
+Output only the final five direction instructions in bullet-point format.
+
+[Important Constraints]
+
+- Never write anything that contradicts the score differences.
+- In particular, never give instructions opposite to the direction
+  of Dimension 13 (“Slow–Fast (Tempo)”).
+  (Example: If the change moves toward “slower,” do NOT write “speak faster.”)
+- Clearly express the causal relationship between vocal manipulation and psychological intent,
+  so that “vocal manipulation → psychological shift” is naturally connected within one sentence.
+- Do NOT use abstract words or metaphors.
+  The instructions must be concrete and usable in an actual recording session.
+
+[Instruction Format]
+
+- Output exactly five bullet points (・).
+- Each instruction must be a single sentence, 40–80 characters in length.
+- At least three of the five must explicitly include concrete vocal manipulations
+  (e.g., pitch, tempo, intensity, breath, sentence endings).
+- The remaining two must center on psychological intent,
+  but must still include at least one vocal manipulation.
+
+The following are examples of natural style (do NOT include them in your output):
+・Make the sentence endings clearer so that a sense of forward momentum naturally emerges.
+・Reduce the amount of breath slightly to convey a feeling of moving into action rather than calmness.
+・Lightly organize the rhythm and add intonation that communicates growing determination.
+
+[Definition of 13 Impression Dimensions (0 = left, 7 = right)]
+{dimension_definitions}
+
+[Before Scores]
+{before_values}
+
+[After Scores]
+{after_values}
+
+[Difference (After − Before)]
+{delta_values}
+
+Based on the above, output only the five direction instructions
+in bullet-point format (・).
+</code></pre>
+</div>
+
+
+<h3 id="llm_prompt">Prompt example for evaluation</h3>
+	<ul>
+		<li>Translated prompt for LLM evaluation.</li>
+	</ul>
+<div class="prompt-box">
+<pre><code>
+You are an expert in vocal expression and speech impression evaluation.
+
+Below is an example in which an instruction was given to a speech sample,
+resulting in a change in its 13-dimensional impression vector.
+
+Your task is to evaluate
+to what extent this change in impression
+is reasonable as a result of the given instruction.
+
+Rather than focusing on small numerical differences,
+place greater emphasis on:
+- the direction of change,
+- the overall tendency,
+- and the semantic correspondence with the instruction.
+
+[Important]
+Do not be overly conservative in your evaluation.
+Your assessment should reflect meaningful differences between models.
+
+If a clear change is observed in a direction that contradicts
+the main intent of the instruction,
+you must not assign a high score,
+even if some aspects appear consistent.
+
+When evaluating, you must first identify
+at least one impression dimension
+that most directly corresponds to the primary intent of the instruction.
+
+The "primary intent" must be determined from the content of the instruction itself,
+not from the impression vector.
+
+During evaluation, consider the following:
+- Very small changes or changes that appear to be at the level of noise may be ignored.
+- Focus your evaluation on major changes that can be semantically linked to the instruction.
+- If a clear change contradicts the primary intent, deduct points accordingly,
+  even if there is partial agreement.
+
+----------------------------------------------------------------
+[Evaluation Procedure (Important)]
+
+Follow the steps below internally before making your judgment.
+Do not output these steps or their reasoning.
+
+1. Identify the primary intent of the instruction.
+2. Determine the impression dimension(s) corresponding to that intent
+   and the expected direction of change.
+3. Assess to what extent the actual change aligns with that expected direction.
+
+First, determine whether the impression change
+can be semantically associated with the instruction.
+
+----------------------------------------------------------------
+[Direction Alignment Score]
+
+[Important]
+Assign 5 only when the result can clearly be considered a successful outcome.
+
+5:
+A clear change corresponding to the primary intent of the instruction is observed,
+and the result can be confidently regarded as a clear success.
+
+4:
+A change aligned with the instruction is observed,
+but the degree of success is limited and not decisive.
+
+3:
+A change is observed,
+but it cannot be clearly judged as either success or failure
+with respect to the instruction.
+
+2:
+Changes in directions inconsistent with the primary intent
+are somewhat dominant.
+
+1:
+Changes clearly opposite to the primary intent
+are dominant.
+----------------------------------------------------------------
+[Definitions of Impression Dimensions]
+{dimension_definitions}
+
+[Interpretation Rules for delta (after - before)]
+
+For each dimension, strictly follow the rules below when interpreting the values:
+
+- A larger numerical value indicates that the impression described on the RIGHT side is stronger.
+- If delta is positive:
+  → The "after" impression is stronger toward the RIGHT side compared to "before".
+- If delta is negative:
+  → The "after" impression is stronger toward the LEFT side compared to "before".
+
+Do NOT misinterpret the sign convention.
+
+----------------------------------------------------------------
+[Before (prior to instruction)]
+{before_values}
+
+[After (following instruction)]
+{after_values}
+
+[Delta (after - before)]
+{delta_values}
+
+[Instruction]
+{instruction}
+----------------------------------------------------------------
+DirectionScore: <1,2,3,4,5>
+
+</code></pre>
+</div>
+
+
+
+</main>
+
+
+</body>
+
+
+</html>
