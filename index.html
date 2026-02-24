@@ -34,30 +34,20 @@
 
 <main>
 
-
-
-
-
-
-<div id="audio" class="bottom">
-
 	<h2>Contents</h2>
 
 	<ul class="toc">
+  		<li class="jisage">
+    		<a href="#llm_prompt_gen">LLM prompt for pseudo direction generation</a>
+  		</li>		
   		<li>
     		<a href="#samples">
 				Samples from Direction-Following TTS
    			</a>
   		</li>
 
-		<li class="jisage">
-    		<a href="#female">Speech samples (female)</a>
-  		</li>
 
-  		<li class="jisage">
-    		<a href="#llm_prompt_gen">LLM prompt for pseudo direction generation</a>
-  		</li>
-	  		<li class="jisage">
+	  	<li class="jisage">
     		<a href="#llm_prompt">LLM propmts for evaluation</a>
   		</li>
 	</ul>
@@ -67,11 +57,127 @@
 		<li>HiFi-GAN was used for all speech sample generation.</li>
 		<li>If you are having trouble listening to the audios, try refreshing the page.</li>
 	</ul>
+
+
+<h3 id="llm_prompt_gen">Prompt example for pseudo direction generation</h3>
+	<ul>
+		<li>Translated prompt for LLM-based pseudo direction generation.</li>
+	</ul>
+<div class="prompt-box">
+<pre><code>
+You are a professional voice director.
+
+Accurately read the Before/After impression scores and their differences below,
+and generate five direction instructions that reflect
+the change in performance and the underlying psychological intent.
+
+Internally perform the following analysis, but do NOT output the summary:
+
+- Summarize the overall impression of Before in one sentence.
+- Summarize the overall impression of After in one sentence.
+- Organize the psychological or intentional changes inferred from the differences.
+- Map vocal manipulations (pitch, intensity, clarity, tempo, intonation, etc.)
+  to the corresponding psychological intent.
+
+Do NOT output your reasoning process.
+Output only the final five direction instructions in bullet-point format.
+
+[Important Constraints]
+
+- Never write anything that contradicts the score differences.
+- In particular, never give instructions opposite to the direction
+  of Dimension 13 (“Slow–Fast (Tempo)”).
+  (Example: If the change moves toward “slower,” do NOT write “speak faster.”)
+- Clearly express the causal relationship between vocal manipulation and psychological intent,
+  so that “vocal manipulation → psychological shift” is naturally connected within one sentence.
+- Do NOT use abstract words or metaphors.
+  The instructions must be concrete and usable in an actual recording session.
+
+[Instruction Format]
+
+- Output exactly five bullet points (・).
+- Each instruction must be a single sentence, 40–80 characters in length.
+- At least three of the five must explicitly include concrete vocal manipulations
+  (e.g., pitch, tempo, intensity, breath, sentence endings).
+- The remaining two must center on psychological intent,
+  but must still include at least one vocal manipulation.
+
+The following are examples of natural style (do NOT include them in your output):
+・Make the sentence endings clearer so that a sense of forward momentum naturally emerges.
+・Reduce the amount of breath slightly to convey a feeling of moving into action rather than calmness.
+・Lightly organize the rhythm and add intonation that communicates growing determination.
+
+[Definition of 13 Impression Dimensions (0 = left, 7 = right)]
+{dimension_definitions}
+
+[Before Scores]
+{before_values}
+
+[After Scores]
+{after_values}
+
+[Difference (After − Before)]
+{delta_values}
+
+Based on the above, output only the five direction instructions
+in bullet-point format (・).
+</code></pre>
+</div>
+
+<h2 id="samples">Pseudo pair speech and generated directions </h2>
+<h3 id="female">Sample1</h3>
+<div class="sample-block">
+    <div class="audio-row">
+
+    	<div class="audio-card">
+        	<p><b>Without modulation</b></p>
+        	<audio controls src="audios/traindata/1_wo.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>With modulation</b></p>
+        	<audio controls src="audios/traindata/1_with.wav"></audio>
+      	</div>
+    </div>
+	<p>
+    	<b>Pseudo direction</b><br>
+		: Let’s clean up the ends of the lines, pick up the pace slightly, and give it a stronger sense of determination.<br>
+		: Let’s bring back the intensity—lean more into your mid-to-upper range and let that inner drive resonate.<br>
+		: Lift the pitch just slightly and aim for a tone that feels both bright and warm.<br>
+		: Keep the tone clear, and let both the warmth and the emotion come through.<br>
+		: Keep the airflow steady, add more energy to the voice, and carefully convey that forward-driving feeling.<br>
+    </p>
+</div>
+<h3 id="female">Sample2</h3>
+<div class="sample-block">
+    <div class="audio-row">
+
+    	<div class="audio-card">
+        	<p><b>Without modulation</b></p>
+        	<audio controls src="audios/traindata/2_wo.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>With modulation</b></p>
+        	<audio controls src="audios/traindata/2_with.wav"></audio>
+      	</div>
+    </div>
+	<p>
+    	<b>Pseudo direction</b><br>
+		: Slow the pace slightly, keep a touch of hesitancy, and let the emotional wavering unfold gradually.<br>
+		: Keep the ends of the lines clear, and use a warmer tone to naturally convey kindness toward the other person.<br>
+		: Lower the pitch slightly, emphasize the calmness, and carefully convey the warmth underneath.<br>
+		: Narrow the airflow and pull the voice back slightly to bring out a more introspective feeling.<br>
+		: Clear up the tone to add more transparency, and express both vulnerability and quiet determination.<br>
+    </p>
+</div>
+
+
+<div id="audio" class="bottom">
   	<h2 id="samples">Direction following zero-shot TTS </h2>
 	<ul>
 		<li>Altering style with directions</li>
 	</ul>
-
   <!-- Sample 1 -->
   <div class="sample-block">
 
@@ -179,73 +285,112 @@
       	</div>
     </div>
 
-  </div>
-</div>
+  	</div>
+   		<h3 id="male">Sample (Male, unseen)</h3>
 
-<h3 id="llm_prompt_gen">Prompt example for pseudo direction generation</h3>
-	<ul>
-		<li>Translated prompt for LLM-based pseudo direction generation.</li>
-	</ul>
-<div class="prompt-box">
-<pre><code>
-You are a professional voice director.
+    	<hr>
+    	<p><b>Source</b> (Audio before being refined)</p>
+    	<audio controls src="audios/refs/out_male/104.wav"></audio>
 
-Accurately read the Before/After impression scores and their differences below,
-and generate five direction instructions that reflect
-the change in performance and the underlying psychological intent.
+		<p>
+    		<b>Direction</b>
+			: Bring the pitch up slightly and make it sound a little younger.
+    	</p>
+    	<div class="audio-row">
 
-Internally perform the following analysis, but do NOT output the summary:
+    		<div class="audio-card">
+        		<p><b>Recorded</b></p>
+        		<audio controls src="audios/out_male/orig/pred_instr31_104.wav"></audio>
+      		</div>
 
-- Summarize the overall impression of Before in one sentence.
-- Summarize the overall impression of After in one sentence.
-- Organize the psychological or intentional changes inferred from the differences.
-- Map vocal manipulations (pitch, intensity, clarity, tempo, intonation, etc.)
-  to the corresponding psychological intent.
+      		<div class="audio-card">
+        		<p><b>Pseudo</b></p>
+        		<audio controls src="audios/out_male/pseudo/pred_instr31_104.wav"></audio>
+      		</div>
 
-Do NOT output your reasoning process.
-Output only the final five direction instructions in bullet-point format.
+      		<div class="audio-card">
+        		<p><b>Full</b></p>
+        		<audio controls src="audios/out_male/full/pred_instr31_104.wav"></audio>
+      		</div>
+    	</div>
+		<hr>
+		<p><b>Source</b> (Audio before being refined)</p>
+    	<audio controls src="audios/refs/out_male/112.wav"></audio>
 
-[Important Constraints]
+		<p>
+    		<b>Direction</b>
+			: Make the ends of the lines clear, and let it sound more decisive.
+    	</p>
+    	<div class="audio-row">
 
-- Never write anything that contradicts the score differences.
-- In particular, never give instructions opposite to the direction
-  of Dimension 13 (“Slow–Fast (Tempo)”).
-  (Example: If the change moves toward “slower,” do NOT write “speak faster.”)
-- Clearly express the causal relationship between vocal manipulation and psychological intent,
-  so that “vocal manipulation → psychological shift” is naturally connected within one sentence.
-- Do NOT use abstract words or metaphors.
-  The instructions must be concrete and usable in an actual recording session.
+    		<div class="audio-card">
+        		<p><b>Recorded</b></p>
+        		<audio controls src="audios/out_male/orig/pred_instr32_112.wav"></audio>
+      		</div>
 
-[Instruction Format]
+      		<div class="audio-card">
+        		<p><b>Pseudo</b></p>
+        		<audio controls src="audios/out_male/pseudo/pred_instr32_112.wav"></audio>
+      		</div>
 
-- Output exactly five bullet points (・).
-- Each instruction must be a single sentence, 40–80 characters in length.
-- At least three of the five must explicitly include concrete vocal manipulations
-  (e.g., pitch, tempo, intensity, breath, sentence endings).
-- The remaining two must center on psychological intent,
-  but must still include at least one vocal manipulation.
+      		<div class="audio-card">
+        		<p><b>Full</b></p>
+        		<audio controls src="audios/out_male/full/pred_instr32_112.wav"></audio>
+      		</div>
+    	</div>
+    	<hr>
+		<p><b>Source</b> (Audio before being refined)</p>
+    	<audio controls src="audios/refs/out_male/100.wav"></audio>
 
-The following are examples of natural style (do NOT include them in your output):
-・Make the sentence endings clearer so that a sense of forward momentum naturally emerges.
-・Reduce the amount of breath slightly to convey a feeling of moving into action rather than calmness.
-・Lightly organize the rhythm and add intonation that communicates growing determination.
+		<p>
+    		<b>Direction</b>
+			: Keep it restrained, with quiet anger underneath.
+    	</p>
+    	<div class="audio-row">
 
-[Definition of 13 Impression Dimensions (0 = left, 7 = right)]
-{dimension_definitions}
+    		<div class="audio-card">
+        		<p><b>Recorded</b></p>
+        		<audio controls src="audios/out_male/orig/pred_instr44_100.wav"></audio>
+      		</div>
 
-[Before Scores]
-{before_values}
+      		<div class="audio-card">
+        		<p><b>Pseudo</b></p>
+        		<audio controls src="audios/out_male/pseudo/pred_instr44_100.wav"></audio>
+      		</div>
 
-[After Scores]
-{after_values}
+      		<div class="audio-card">
+        		<p><b>Full</b></p>
+        		<audio controls src="audios/out_male/full/pred_instr44_100.wav"></audio>
+      		</div>
+    	</div>
+    	<hr>
+		<p><b>Source</b> (Audio before being refined)</p>
+    	<audio controls src="audios/refs/out_male/115.wav"></audio>
+		<p>
+    		<b>Direction</b>
+			: Let’s ease off the overall intensity and give it a more laid-back feel.
+    	</p>
+    	<div class="audio-row">
 
-[Difference (After − Before)]
-{delta_values}
+    		<div class="audio-card">
+        		<p><b>Recorded</b></p>
+        		<audio controls src="audios/out_male/orig/pred_instr09_115.wav"></audio>
+      		</div>
 
-Based on the above, output only the five direction instructions
-in bullet-point format (・).
-</code></pre>
-</div>
+      		<div class="audio-card">
+        		<p><b>Pseudo</b></p>
+        		<audio controls src="audios/out_male/pseudo/pred_instr09_115.wav"></audio>
+      		</div>
+
+      		<div class="audio-card">
+        		<p><b>Full</b></p>
+        		<audio controls src="audios/out_male/full/pred_instr09_115.wav"></audio>
+      		</div>
+    	</div>
+    	<hr>
+	</div>
+
+
 
 
 <h3 id="llm_prompt">Prompt example for evaluation</h3>
