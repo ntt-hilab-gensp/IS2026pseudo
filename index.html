@@ -15,17 +15,13 @@
 
 
 	<h1>
-		<p>Learning Direction-Following TTS with Pseudo Performance Directions</p>
+		<p>Scalable Direction-Following TTS via Voice Impression-Guided Pseudo Triplet Construction</p>
 	</h1>	
 
 	<h2>
-		<!-- <p>Kenichi Fujita, Shota Horiguchi, and Yusuke Ijima</p>
-		-->
 		<p>Anonymous submission to Interspeech 2026</p>
 	</h2>	
 	<h3>
-		<!-- <p>NTT Corporation, Japan</p>
-		-->
 	</h3>	
 
 
@@ -40,6 +36,12 @@
   		<li class="jisage">
     		<a href="#llm_prompt_gen">LLM prompt for pseudo direction generation</a>
   		</li>		
+		<li class="jisage">
+    		<a href="#pseudo_samples">Pseudo pair speech and generated directions</a>
+  		</li>	
+		<li class="jisage">
+    		<a href="#recorded_samples">Recorded pair speech and direction</a>
+  		</li>
   		<li>
     		<a href="#samples">
 				Samples from Direction-Following TTS
@@ -124,7 +126,7 @@ in bullet-point format (・).
 </code></pre>
 </div>
 
-<h2 id="samples">Pseudo pair speech and generated directions </h2>
+<h2 id="pseudo_samples">Pseudo pair speech and generated directions </h2>
 <h3 id="female">Sample1</h3>
 <div class="sample-block">
     <div class="audio-row">
@@ -193,6 +195,46 @@ in bullet-point format (・).
 		: Slow the tempo just a touch, and speak calmly, as if weighing each word.<br>
 		: Keep the clarity, but give the voice more body so that a strong underlying will comes through even within the vulnerability.<br>
 		: Lower the pitch just slightly, and let both the restlessness and the weight come through at the same time.<br>
+    </p>
+</div>
+
+<h2 id="recorded_samples">Recorded pair speech and direction </h2>
+<h3 id="female">Sample1</h3>
+<div class="sample-block">
+    <div class="audio-row">
+
+    	<div class="audio-card">
+        	<p><b>Pre-modification</b></p>
+        	<audio controls src="audios/recorded/F_0.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>Post-modification</b></p>
+        	<audio controls src="audios/recorded/F_1.wav"></audio>
+      	</div>
+    </div>
+	<p>
+    	<b>Direction</b><br>
+		: Begin at the start of the sentence and gradually raise your voice as you go. To convey a rising excitement, finish the last word at your highest pitch.<br>
+    </p>
+</div>
+<h3 id="female">Sample2</h3>
+<div class="sample-block">
+    <div class="audio-row">
+
+    	<div class="audio-card">
+        	<p><b>Pre-modification</b></p>
+        	<audio controls src="audios/recorded/M_0.wav"></audio>
+      	</div>
+
+      	<div class="audio-card">
+        	<p><b>Post-modification</b></p>
+        	<audio controls src="audios/recorded/M_1.wav"></audio>
+      	</div>
+    </div>
+	<p>
+    	<b>Direction</b><br>
+		: Please begin with a slight exhale. To convey a tired feeling, add a bit of breath to your voice at the very start of your line and speak with a softer volume.<br>
     </p>
 </div>
 
